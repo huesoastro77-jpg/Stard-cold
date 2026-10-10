@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Solicita una cotización de servicios a Stard-cold por WhatsApp.">
+    <title>Cotizar | Stard-cold</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="Stard-cold, volver al inicio">
+                <span class="brand-icon"><i class="fa-solid fa-snowflake" aria-hidden="true"></i></span>
+                <span>
+                    <span class="brand-name">Stard-cold</span>
+                    <span class="brand-subtitle">Climatización &amp; Acabados</span>
+                </span>
+            </a>
+
+            <nav class="main-nav" aria-label="Navegación principal">
+                <a href="index.html">Inicio</a>
+                <a href="index.html#servicios">Servicios</a>
+                <a href="cotizar.html" aria-current="page">Cotizador</a>
+            </nav>
+
+            <a class="button button-small" href="index.html#servicios">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Volver
+            </a>
+        </div>
+    </header>
+
+    <main class="quote-page">
+        <section class="section quote-section">
+            <div class="container quote-layout">
+                <div class="quote-copy">
+                    <span class="section-kicker">Cotizador rápido</span>
+                    <h1>Cuéntanos qué necesitas</h1>
+                    <p>Completa tus datos y enviaremos tu solicitud a Stard-cold por WhatsApp para dar seguimiento a tu proyecto.</p>
+                </div>
+
+                <form class="quote-form" id="quote-form">
+                    <div class="form-field">
+                        <label for="client-name">Tu nombre</label>
+                        <input id="client-name" name="name" type="text" placeholder="Ej. Carlos Pérez" autocomplete="name" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="client-phone">Teléfono de contacto</label>
+                        <input id="client-phone" name="phone" type="tel" placeholder="Ej. +503 7000-0000" autocomplete="tel" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="service-type">Servicio que requieres</label>
+                        <select id="service-type" name="service" required>
+                            <option value="Aire acondicionado">Aire acondicionado</option>
+                            <option value="Electricidad">Electricidad</option>
+                            <option value="Cielo falso">Cielo falso</option>
+                            <option value="Tablaroca">Tablaroca</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="project-details">Detalles del trabajo</label>
+                        <textarea id="project-details" name="details" rows="4" placeholder="Describe brevemente tu proyecto, ubicación o medidas aproximadas."></textarea>
+                    </div>
+                    <button class="button submit-button" type="submit">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Solicitar cotización
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-bottom">&copy; 2026 Stard-cold. Todos los derechos reservados.</div>
+    </footer>
+
+    <script>
+        document.getElementById('quote-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(event.currentTarget);
+            const name = formData.get('name').trim();
+            const phone = formData.get('phone').trim();
+            const service = formData.get('service');
+            const details = formData.get('details').trim() || 'Sin detalles adicionales';
+            const message = [
+                'Hola Stard-cold, quisiera solicitar una cotización.',
+                '',
+                `Nombre: ${name}`,
+                `Teléfono: ${phone}`,
+                `Servicio: ${service}`,
+                `Detalles: ${details}`
+            ].join('\n');
+
+            const whatsappUrl = new URL('https://wa.me/qr/M72R7VWAOTO6J1');
+            whatsappUrl.searchParams.set('text', message);
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        });
+    </script>
+</body>
+</html>
